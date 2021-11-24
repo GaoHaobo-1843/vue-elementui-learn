@@ -1346,21 +1346,26 @@
 
             <br />
 
-            <el-dialog
+            <!-- <el-dialog
                 :visible.sync="visible1352"
                 width="40%"
                 title="选择账户"
                 center
-            >
-                <el-table :data="data1352" @row-click="selectAccount1352">
+            > -->
+                <!-- <el-table :data="data1352" @row-click="selectAccount1352" stripe>
                     <el-table-column prop="ts1" label="账号" align="center">
                     </el-table-column>
                     <el-table-column prop="ts2" label="账户名称" align="center">
                     </el-table-column>
                     <el-table-column prop="ts3" label="账户类型" align="center">
                     </el-table-column>
-                </el-table>
-            </el-dialog>
+                </el-table> -->
+
+            <!-- </el-dialog> -->
+
+            <common-dialog dialogTitle="账户选择" :visible="visible1352">
+                <account-query-table :accountDataList="data1352" @get-one-line="selectAccount1352"></account-query-table>
+            </common-dialog>
 
             <el-dialog
                 :visible.sync="print1352"
@@ -1400,6 +1405,10 @@
 </template>
 
 <script>
+import AccountQueryTable from "../../components/case/AccountQueryTable.vue"
+import CommonDialog from "../../components/case/CommonDialog.vue"
+
+
 export default {
     name: "Test",
 
@@ -2298,7 +2307,8 @@ export default {
         },
 
         /* 选中表格中一行触发操作 */
-        selectAccount1352() {
+        selectAccount1352(row) {
+            console.log(row)
             this.visible1352 = false;
         },
 
@@ -2580,6 +2590,11 @@ export default {
             }
         },
     },
+
+    components:{
+        "account-query-table":AccountQueryTable,
+        "common-dialog":CommonDialog,
+    }
 };
 </script>
 
